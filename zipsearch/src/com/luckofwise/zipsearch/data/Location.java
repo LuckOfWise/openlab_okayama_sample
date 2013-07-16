@@ -9,4 +9,12 @@ public class Location {
 	String y;
 	String prefecture;
 	String postal;
+
+	public String getPostal() {
+		return postal;
+	}
+
+	public String getAddress() {
+		return prefecture + city + town;
+	}
 }
