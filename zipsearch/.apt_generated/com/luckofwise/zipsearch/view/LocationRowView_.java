@@ -40,8 +40,8 @@ public final class LocationRowView_
     }
 
     private void afterSetContentView_() {
-        textViewAddress = ((TextView) findViewById(id.textViewAddress));
         textViewPostal = ((TextView) findViewById(id.textViewPostal));
+        textViewAddress = ((TextView) findViewById(id.textViewAddress));
     }
 
     /**

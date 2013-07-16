@@ -9,8 +9,10 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
+import com.googlecode.androidannotations.api.SdkVersionHelper;
 import com.luckofwise.zipsearch.R.layout;
 
 public final class MainActivity_
@@ -48,6 +50,14 @@ public final class MainActivity_
     public void setContentView(View view) {
         super.setContentView(view);
         afterSetContentView_();
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (((SdkVersionHelper.getSdkInt()< 5)&&(keyCode == KeyEvent.KEYCODE_BACK))&&(event.getRepeatCount() == 0)) {
+            onBackPressed();
+        }
+        return super.onKeyDown(keyCode, event);
     }
 
     public static MainActivity_.IntentBuilder_ intent(Context context) {

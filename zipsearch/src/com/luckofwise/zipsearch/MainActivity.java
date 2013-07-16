@@ -5,13 +5,13 @@ import android.support.v4.app.FragmentTransaction;
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.ActionBar.Tab;
 import com.actionbarsherlock.app.ActionBar.TabListener;
-import com.actionbarsherlock.app.SherlockActivity;
+import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.Menu;
 import com.googlecode.androidannotations.annotations.AfterViews;
 import com.googlecode.androidannotations.annotations.EActivity;
 
 @EActivity(R.layout.activity_main)
-public class MainActivity extends SherlockActivity implements TabListener {
+public class MainActivity extends SherlockFragmentActivity implements TabListener {
 
 	private String[] locations;
 
@@ -20,7 +20,7 @@ public class MainActivity extends SherlockActivity implements TabListener {
 		locations = getResources().getStringArray(R.array.locations);
 		configureActionBar();
 	}
-	
+
 	private void configureActionBar() {
 		getSupportActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 		for (String location : locations) {
@@ -33,6 +33,11 @@ public class MainActivity extends SherlockActivity implements TabListener {
 
 	@Override
 	public void onTabSelected(Tab tab, FragmentTransaction ft) {
+		if (tab.getText().equals("検索")) {
+			ft.replace(android.R.id.content, new SearchFragment_());
+		} else {
+			ft.replace(android.R.id.content, new FavoriteFragment_());
+		}
 	}
 
 	@Override
