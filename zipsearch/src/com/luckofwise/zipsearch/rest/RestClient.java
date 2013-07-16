@@ -1,15 +1,15 @@
-
 package com.luckofwise.zipsearch.rest;
+
+import org.springframework.http.converter.json.GsonHttpMessageConverter;
 
 import com.googlecode.androidannotations.annotations.rest.Get;
 import com.googlecode.androidannotations.annotations.rest.Rest;
-import org.springframework.http.converter.StringHttpMessageConverter;
+import com.luckofwise.zipsearch.data.Response;
 
-@Rest(rootUrl = "http://10.0.0.2", converters = StringHttpMessageConverter.class)
+@Rest(rootUrl = "http://geoapi.heartrails.com/api", converters = GsonHttpMessageConverter.class)
 public interface RestClient {
 
-
-    @Get("/")
-    public abstract void main();
+	@Get("/json?method=suggest&keyword={keyword}&matching=like")
+	public Response getResponse(String keyword);
 
 }

@@ -5,10 +5,12 @@
 
 package com.luckofwise.zipsearch.rest;
 
+import java.util.HashMap;
+import com.luckofwise.zipsearch.data.Response;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
-import org.springframework.http.converter.StringHttpMessageConverter;
+import org.springframework.http.converter.json.GsonHttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
 
 public class RestClient_
@@ -20,15 +22,17 @@ public class RestClient_
 
     public RestClient_() {
         restTemplate = new RestTemplate();
-        restTemplate.getMessageConverters().add(new StringHttpMessageConverter());
-        rootUrl = "http://10.0.0.2";
+        restTemplate.getMessageConverters().add(new GsonHttpMessageConverter());
+        rootUrl = "http://geoapi.heartrails.com/api";
     }
 
     @Override
-    public void main() {
+    public Response getResponse(String keyword) {
+        HashMap<String, Object> urlVariables = new HashMap<String, Object>();
+        urlVariables.put("keyword", keyword);
         HttpHeaders httpHeaders = new HttpHeaders();
         HttpEntity<Object> requestEntity = new HttpEntity<Object>(httpHeaders);
-        restTemplate.exchange(rootUrl.concat("/"), HttpMethod.GET, requestEntity, null).getBody();
+        return restTemplate.exchange(rootUrl.concat("/json?method=suggest&keyword={keyword}&matching=like"), HttpMethod.GET, requestEntity, Response.class, urlVariables).getBody();
     }
 
 }
