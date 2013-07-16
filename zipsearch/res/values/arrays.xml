@@ -2,10 +2,8 @@
 <resources>
 
 	<string-array name="locations">
-		<item>Home</item>
-		<item>Email</item>
-		<item>Calendar</item>
-		<item>Browser</item>
+		<item>検索</item>
+		<item>お気に入り</item>
 	</string-array>
 
 </resources>
