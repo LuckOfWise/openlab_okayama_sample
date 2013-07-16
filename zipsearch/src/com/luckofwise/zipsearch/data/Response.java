@@ -3,9 +3,9 @@ package com.luckofwise.zipsearch.data;
 import java.util.List;
 
 public class Response {
-	List<Location> locations;
+	private List<Location> location;
 
 	public List<Location> getLocations() {
-		return locations;
+		return location;
 	}
 }

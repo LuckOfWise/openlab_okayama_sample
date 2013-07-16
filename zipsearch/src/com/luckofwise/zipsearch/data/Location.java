@@ -1,14 +1,14 @@
 package com.luckofwise.zipsearch.data;
 
 public class Location {
-	String city;
-	String city_kana;
-	String town;
-	String town_kana;
-	String x;
-	String y;
-	String prefecture;
-	String postal;
+	private String city;
+	private String city_kana;
+	private String town;
+	private String town_kana;
+	private String x;
+	private String y;
+	private String prefecture;
+	private String postal;
 
 	public String getPostal() {
 		return postal;

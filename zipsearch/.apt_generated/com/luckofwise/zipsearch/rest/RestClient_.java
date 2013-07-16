@@ -6,7 +6,7 @@
 package com.luckofwise.zipsearch.rest;
 
 import java.util.HashMap;
-import com.luckofwise.zipsearch.data.Response;
+import com.luckofwise.zipsearch.data.ResponseContainer;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -27,12 +27,12 @@ public class RestClient_
     }
 
     @Override
-    public Response getResponse(String keyword) {
+    public ResponseContainer getResponseContainer(String keyword) {
         HashMap<String, Object> urlVariables = new HashMap<String, Object>();
         urlVariables.put("keyword", keyword);
         HttpHeaders httpHeaders = new HttpHeaders();
         HttpEntity<Object> requestEntity = new HttpEntity<Object>(httpHeaders);
-        return restTemplate.exchange(rootUrl.concat("/json?method=suggest&keyword={keyword}&matching=like"), HttpMethod.GET, requestEntity, Response.class, urlVariables).getBody();
+        return restTemplate.exchange(rootUrl.concat("/json?method=suggest&keyword={keyword}&matching=like"), HttpMethod.GET, requestEntity, ResponseContainer.class, urlVariables).getBody();
     }
 
 }
