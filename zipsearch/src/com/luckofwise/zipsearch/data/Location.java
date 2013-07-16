@@ -1,5 +1,7 @@
 package com.luckofwise.zipsearch.data;
 
+import android.net.Uri;
+
 import com.j256.ormlite.field.DatabaseField;
 
 public class Location {
@@ -32,5 +34,9 @@ public class Location {
 
 	public String getAddress() {
 		return prefecture + city + town;
+	}
+	
+	public Uri getGeoUri() {
+		return Uri.parse("geo:" + x + "," + y + "?q=" + getAddress());
 	}
 }
