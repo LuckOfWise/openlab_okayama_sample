@@ -52,8 +52,8 @@ public final class SearchFragment_
     }
 
     private void afterSetContentView_() {
-        editTextKeyword = ((EditText) findViewById(com.luckofwise.zipsearch.R.id.editTextKeyword));
         listViewLocations = ((ListView) findViewById(com.luckofwise.zipsearch.R.id.listViewLocations));
+        editTextKeyword = ((EditText) findViewById(com.luckofwise.zipsearch.R.id.editTextKeyword));
         {
             AdapterView<?> view = ((AdapterView<?> ) findViewById(com.luckofwise.zipsearch.R.id.listViewLocations));
             if (view!= null) {

@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.view.KeyEvent;
+import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
@@ -46,7 +47,7 @@ public class SearchFragment extends Fragment {
 
 	@OrmLiteDao(helper = DatabaseHelper.class, model = Location.class)
 	Dao<Location, Long> mLocationDao;
-	
+
 	@AfterViews
 	void init() {
 		mLocationAdapter.setData(new ArrayList<Location>());
@@ -54,15 +55,26 @@ public class SearchFragment extends Fragment {
 		editTextKeyword.setOnEditorActionListener(new OnEditorActionListener() {
 			@Override
 			public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                    InputMethodManager im = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-                    im.hideSoftInputFromWindow(v.getWindowToken(), 0);
-                    search();
-                    return true;
-                }
+				if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+					InputMethodManager im = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+					im.hideSoftInputFromWindow(v.getWindowToken(), 0);
+					search();
+					return true;
+				}
 				return false;
 			}
 		});
+		editTextKeyword.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+			@Override
+			public void onFocusChange(View v, boolean hasFocus) {
+				if (hasFocus == false) {
+					InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+					imm.hideSoftInputFromWindow(v.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+				}
+			}
+		});
+		InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+		imm.showSoftInput(editTextKeyword, 0);
 	}
 
 	@Background
@@ -73,14 +85,14 @@ public class SearchFragment extends Fragment {
 			showLocations();
 		}
 	}
-	
+
 	@UiThread
 	void showLocations() {
 		mLocationAdapter.notifyDataSetInvalidated();
 	}
-	
+
 	@ItemClick
-	void listViewLocations(Location location){
+	void listViewLocations(Location location) {
 		try {
 			mLocationDao.create(location);
 			Toast.makeText(getActivity(), "お気に入りへ登録しました！", Toast.LENGTH_SHORT).show();
