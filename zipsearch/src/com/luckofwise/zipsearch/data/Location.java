@@ -1,15 +1,31 @@
 package com.luckofwise.zipsearch.data;
 
-public class Location {
-	private String city;
-	private String city_kana;
-	private String town;
-	private String town_kana;
-	private String x;
-	private String y;
-	private String prefecture;
-	private String postal;
+import com.j256.ormlite.field.DatabaseField;
 
+public class Location {
+	@DatabaseField(generatedId = true)
+	int id;
+	@DatabaseField
+	String city;
+	@DatabaseField
+	String city_kana;
+	@DatabaseField
+	String town;
+	@DatabaseField
+	String town_kana;
+	@DatabaseField
+	String x;
+	@DatabaseField
+	String y;
+	@DatabaseField
+	String prefecture;
+	@DatabaseField
+	String postal;
+
+	public Location() {
+		// needed by ormlite
+	}
+	
 	public String getPostal() {
 		return postal;
 	}
