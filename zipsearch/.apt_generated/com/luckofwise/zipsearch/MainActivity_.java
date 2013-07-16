@@ -9,21 +9,14 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
-import android.widget.TextView;
-import com.googlecode.androidannotations.api.BackgroundExecutor;
-import com.luckofwise.zipsearch.R.id;
 import com.luckofwise.zipsearch.R.layout;
-import com.luckofwise.zipsearch.rest.RestClient_;
 
 public final class MainActivity_
     extends MainActivity
 {
 
-    private Handler handler_ = new Handler();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -33,11 +26,9 @@ public final class MainActivity_
     }
 
     private void init_(Bundle savedInstanceState) {
-        restClient = new RestClient_();
     }
 
     private void afterSetContentView_() {
-        hello = ((TextView) findViewById(id.hello));
         afterViews();
     }
 
@@ -61,42 +52,6 @@ public final class MainActivity_
 
     public static MainActivity_.IntentBuilder_ intent(Context context) {
         return new MainActivity_.IntentBuilder_(context);
-    }
-
-    @Override
-    public void doSomethingElseOnUiThread() {
-        handler_.post(new Runnable() {
-
-
-            @Override
-            public void run() {
-                try {
-                    MainActivity_.super.doSomethingElseOnUiThread();
-                } catch (RuntimeException e) {
-                    Log.e("MainActivity_", "A runtime exception was thrown while executing code in a runnable", e);
-                }
-            }
-
-        }
-        );
-    }
-
-    @Override
-    public void doSomethingInBackground() {
-        BackgroundExecutor.execute(new Runnable() {
-
-
-            @Override
-            public void run() {
-                try {
-                    MainActivity_.super.doSomethingInBackground();
-                } catch (RuntimeException e) {
-                    Log.e("MainActivity_", "A runtime exception was thrown while executing code in a runnable", e);
-                }
-            }
-
-        }
-        );
     }
 
     public static class IntentBuilder_ {

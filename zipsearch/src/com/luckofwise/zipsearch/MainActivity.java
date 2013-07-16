@@ -1,27 +1,18 @@
 package com.luckofwise.zipsearch;
 
 import android.support.v4.app.FragmentTransaction;
-import android.widget.TextView;
+
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.ActionBar.Tab;
 import com.actionbarsherlock.app.ActionBar.TabListener;
 import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.view.Menu;
 import com.googlecode.androidannotations.annotations.AfterViews;
-import com.googlecode.androidannotations.annotations.Background;
 import com.googlecode.androidannotations.annotations.EActivity;
-import com.googlecode.androidannotations.annotations.UiThread;
-import com.googlecode.androidannotations.annotations.ViewById;
-import com.googlecode.androidannotations.annotations.rest.RestService;
-import com.luckofwise.zipsearch.rest.RestClient;
 
 @EActivity(R.layout.activity_main)
 public class MainActivity extends SherlockActivity implements TabListener {
 
-	@ViewById
-	TextView hello;
-	@RestService
-	RestClient restClient;
 	private String[] locations;
 
 	@AfterViews
@@ -29,18 +20,7 @@ public class MainActivity extends SherlockActivity implements TabListener {
 		locations = getResources().getStringArray(R.array.locations);
 		configureActionBar();
 	}
-
-	@UiThread
-	void doSomethingElseOnUiThread() {
-		hello.setText("Hi!");
-	}
-
-	@Background
-	void doSomethingInBackground() {
-		restClient.main();
-		doSomethingElseOnUiThread();
-	}
-
+	
 	private void configureActionBar() {
 		getSupportActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 		for (String location : locations) {
